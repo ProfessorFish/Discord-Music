@@ -7,6 +7,7 @@
       "ffmpeg-static": "^4.4.1",
       "libsodium-wrappers": "^0.7.9",
       "opusscript": "^0.0.8",
+      "play-dl": "^1.8.9",
       "pretty-ms": "^7.0.1",
       "ytdl-core": "^4.10.1",
       "ytpl": "^2.2.3",
