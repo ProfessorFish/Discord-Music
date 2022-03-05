@@ -5,8 +5,9 @@ module.exports = async function(data, thise){
     url: (data.shortUrl) ? data.shortUrl : data.url,
     length: toMilliseconds(data.duration)
   });
-  thise.data.queue.add(newSong);
+  await thise.data.queue.add(newSong);
   if(thise.data.audioPlayer.state.status === "idle"){
+    await thise.data.queue.songs[0].resolveData()
     await thise.playNext();
   }
 }

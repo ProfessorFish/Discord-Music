@@ -22,4 +22,7 @@ module.exports = async function(thise){
   } catch(err){
     console.log(err)
   }
+  if(thise.data.queue.songs[1]){
+    await thise.data.queue.songs[1].resolveData()
+  }
 }

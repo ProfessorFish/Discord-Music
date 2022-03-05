@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const disPages = require("discord.js-embed-pages");
+const pretty = require("pretty-ms");
 module.exports = {
   triggers: ["queue", "q"],
   usage: "queue",
@@ -12,11 +13,15 @@ module.exports = {
     var thisSongs = thisQueue.songs;
     let amountOfPages = Math.ceil(thisSongs.length / 10)
     var pages = []
+    var totalLength = 0;
+    for (var i = 0; i < thisSongs.length; i++) {
+      totalLength += thisSongs[i].length
+    }
     for (var i = 0; i < amountOfPages; i++) {
       const embed = new Discord.MessageEmbed()
         .setColor(client.config.embed_colour)
         .setAuthor({ name: "Queue page " + (i + 1) + " out of " + (amountOfPages), iconURL: client.user.avatarURL({ dynamic: true }) })
-      .setFooter("Queue page " + (i + 1) + " out of " + (amountOfPages))
+      .setFooter({text: ("Queue page " + (i + 1) + " out of " + (amountOfPages) + " | " + (thisSongs.length - 1) + " song(s)" + " | " + "Duration: " + pretty(totalLength, { colonNotation: true }))})
       for (var ii = i * 10; ii < (i + 1) * 10; ii++) {
         if (!thisSongs[ii]) {
           i = amountOfPages * 10 + 1
