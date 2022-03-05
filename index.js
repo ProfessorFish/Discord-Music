@@ -13,6 +13,7 @@ const client = new Discord.Client({
     FLAGS.GUILDS,
     FLAGS.GUILD_VOICE_STATES
   ]
-})
+});
+global.client = client;
 client.players = []
 require("./Functions/Start/BootUp.js")(client);

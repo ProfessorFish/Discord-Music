@@ -11,17 +11,17 @@ module.exports = {
     var thisQueue = thisPlayer.data.queue;
     var thisSongs = thisQueue.songs;
     let amountOfPages = Math.ceil(thisSongs.length / 10)
-    console.log(thisSongs)
     var pages = []
     for (var i = 0; i < amountOfPages; i++) {
       const embed = new Discord.MessageEmbed()
         .setColor(client.config.embed_colour)
         .setAuthor({ name: "Queue page " + (i + 1) + " out of " + (amountOfPages), iconURL: client.user.avatarURL({ dynamic: true }) })
+      .setFooter("Queue page " + (i + 1) + " out of " + (amountOfPages))
       for (var ii = i * 10; ii < (i + 1) * 10; ii++) {
         if (!thisSongs[ii]) {
           i = amountOfPages * 10 + 1
         } else {
-          embed.addField((ii === 0) ? "Now playing:" : "Position " + ii.toString() + ":", `[${thisSongs[ii].info.title}](${thisSongs[ii].url})`)
+          embed.addField((ii === 0) ? "Now playing:" : "Position " + ii.toString() + ":", `[${thisSongs[ii].title}](${thisSongs[ii].url})`)
         }
       }
       pages.push(embed)
