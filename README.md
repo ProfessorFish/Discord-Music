@@ -17,3 +17,5 @@ A simple music bot made with pure discord.js v13 and no outside packages
 
 **SUPPORT:**
 Discord Server: https://discord.gg/q67byAf
+
+*Thanks for reading*
