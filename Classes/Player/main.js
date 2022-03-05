@@ -14,12 +14,11 @@ module.exports = class Player{
     this.id = vcChannel.guild.id;
     client.players.push(this);
     this.data.audioPlayer.on(AudioPlayerStatus.Idle, async (oldState, newState) => {
-      console.log("fin")
       await this.data.queue.playNext();
-      if(this.data.queue.songs[0]){
+      if(this.data.queue.songs[0] && this.data && this.data.vcChannel.guild.me.voice.channel){
 	await this.playNext();
       } else{
-        this.data.textChannel.send("Queue finished!\n:star: Thanks for using " + this.client.user.username + " :star:")
+        if(!this.data || !this.data.vcChannel.guild.me.voice.channel)return
         await this.stop();
       }
 });
@@ -28,6 +27,9 @@ module.exports = class Player{
 	console.log(error);
 	this.playNext();
 });
+  }
+  async shuffle(){
+    return await require("./Functions/shuffle.js")(this)
   }
   async skip(){
     return await require("./Functions/skip.js")(this)
