@@ -34,7 +34,7 @@ module.exports = async function(client) {
 		await rest.put(
 		//IF YOUR BOT IS JUST FOR ONE GUILD, REMOVE THE // ON THE LINE BELOW, CHANGE 729965213788536902 TO YOUR GUILD(SERVER) ID AND ADD // TO THE LINE BELOW THE LINE YOU JUST REMOVED THE // FROM 
       //Routes.applicationGuildCommands(client.config.id, "729965213788536902"),{ body: slashData });
-      Routes.applicationCommands(clientId),{ body: commands },)
+      Routes.applicationCommands(client.config.id),{ body: commands },)
 		console.log('Successfully reloaded application (/) commands.'.green.bold);
 	} catch (error) {
 		console.error(error);
