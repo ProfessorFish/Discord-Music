@@ -1,13 +1,13 @@
 const Discord = require("discord.js");
 const { SlashCommandBuilder } = require('@discordjs/builders');
 module.exports = {
-  triggers: ["shuffle"],
-  usage: "shuffle",
+  triggers: ["stop"],
+  usage: "stop",
   permissions: [],
   slashData: new SlashCommandBuilder()
-	.setName('shuffle')
-	.setDescription("Shuffle the queue."),
-  description: "Shuffle the queue.",
+	.setName('stop')
+	.setDescription("Stop the music."),
+  description: "Stop the music.",
   run: async function(message, client) {
     var userVC = message.member.voice.channel
     if (!userVC || typeof userVC === Discord.StageChannel) {
@@ -17,8 +17,7 @@ module.exports = {
       return message.channel.send("You are not in the channel I am currently playing in: <#" + message.guild.me.voice.channel.id + ">")
     }
     var thisPlayer = client.players.find(k=> k.id === message.guild.id)
-    if(!thisPlayer.data.queue.songs[1])return message.channel.send("No songs to shuffle!")
-    await thisPlayer.shuffle();
+    await thisPlayer.stop();
 },
   slash: async function(interaction, client){
     var userVC = interaction.member.voice.channel
@@ -29,8 +28,7 @@ module.exports = {
       return interaction.reply("You are not in the channel I am currently playing in: <#" + interaction.guild.me.voice.channel.id + ">")
     }
     var thisPlayer = client.players.find(k=> k.id === interaction.guild.id)
-    if(!thisPlayer.data.queue.songs[1])return interaction.channel.send("No songs to shuffle!")
-    interaction.reply({content: "Shuffling...", fetchReply: true}).then(k=> k.delete())
-    await thisPlayer.shuffle();
+    interaction.reply({content: "Stopping...", fetchReply: true}).then(k=> k.delete())
+    await thisPlayer.stop();
   }
 }
