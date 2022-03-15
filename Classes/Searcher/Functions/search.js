@@ -12,7 +12,10 @@ const filter1 = filters1.get('Type').get('Video');
     if(!await ytpl(prompt)){
       return false
     } else{
-      var playlist = await ytpl(prompt);
+      var playlist = await ytpl(prompt, {
+        limit: Infinity,
+        pages: Infinity
+      });
       return playlist.items;
     }
   }
