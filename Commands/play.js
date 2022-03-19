@@ -25,7 +25,7 @@ module.exports = {
     if (message.guild.me.voice.channel && message.member.voice.channel != message.guild.me.voice.channel) {
       return message.channel.send("I'm already playing in the following channel: <#" + message.guild.me.voice.channel.id + ">")
     }
-    if (!args[0] && client.players.find(k => k.id === message.guild.id)) {
+    if (!args[0] && client.players.find(k => k.id === message.guild.id) && client.players.find(k=> k.id === message.guild.id).data.audioPlayer.state.status === "paused") {
       var thisPlayer = client.players.find(k => k.id === message.guild.id)
       thisPlayer.resume();
       return;
@@ -83,6 +83,7 @@ module.exports = {
       return interaction.reply("I'm already playing in the following channel: <#" + interaction.guild.me.voice.channel.id + ">")
     }
     let videoData = await client.classes.Searcher.search(args0, client)
+    //console.log(videoData)
     if (!videoData) return interaction.reply("No results found!")
     var vidStuff = []
     if (videoData[0]) {
